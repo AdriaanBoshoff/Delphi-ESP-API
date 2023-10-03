@@ -1,0 +1,370 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'ESP API Test'
+  ClientHeight = 454
+  ClientWidth = 735
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object tbcMain: TTabControl
+    Align = Client
+    Size.Width = 735.000000000000000000
+    Size.Height = 414.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 4
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      735s
+      388s
+      735s
+      388s
+      735s
+      388s
+      735s
+      388s
+      735s
+      388s)
+    object tbtmAllowance: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 110.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Check Allowance'
+      object mmoAllowanceResult: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 323.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 721.000000000000000000
+        Viewport.Height = 319.000000000000000000
+      end
+      object btnCheckAllowance: TButton
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Check Allowance'
+        OnClick = btnCheckAllowanceClick
+      end
+    end
+    object tbtmStatus: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 53.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Status'
+      object btnGetStatus: TButton
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Get Status'
+        OnClick = btnGetStatusClick
+      end
+      object mmoStatusResult: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 323.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 721.000000000000000000
+        Viewport.Height = 319.000000000000000000
+      end
+    end
+    object tbtmSearchAreasText: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 120.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Search Areas (Text)'
+      object mmoSearchAreasText: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 348.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 721.000000000000000000
+        Viewport.Height = 344.000000000000000000
+      end
+      object lytSearchAreasText: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object edtSearchAreasText: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          Size.Width = 725.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Search Areas Eg. "Pretoria North"'
+          OnKeyUp = edtSearchAreasTextKeyUp
+          object btnSearchAreasText: TEditButton
+            CanFocus = False
+            Cursor = crArrow
+            Size.Width = 80.000000000000000000
+            Size.Height = 21.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'Search'
+            OnClick = btnSearchAreasTextClick
+          end
+        end
+      end
+    end
+    object tbtmSearchAreasGPS: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 120.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Search Areas (GPS)'
+      ExplicitSize.cx = 120.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object mmoSearchAreasGPSResult: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 348.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 721.000000000000000000
+        Viewport.Height = 344.000000000000000000
+      end
+      object lytSearchAreasGPS: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object lblLatHeader: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Size.Width = 48.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'Latitude:'
+          TabOrder = 1
+        end
+        object edtLat: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 3
+          Text = '-26.0269658'
+          Position.X = 53.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Latitude'
+        end
+        object lblLongitude: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 20.000000000000000000
+          Position.X = 173.000000000000000000
+          Size.Width = 59.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'Longitude:'
+          TabOrder = 0
+        end
+        object edtLong: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 2
+          Text = '28.0137339'
+          Position.X = 237.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Longitude'
+        end
+        object btnSearchAreasGPS: TButton
+          Align = Left
+          Margins.Left = 50.000000000000000000
+          Position.X = 387.000000000000000000
+          Size.Width = 80.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Search'
+          OnClick = btnSearchAreasGPSClick
+        end
+      end
+    end
+    object tbtmGetAreaInformation: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 132.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Get Area Information'
+      ExplicitSize.cx = 120.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object mmoGetAreaInformationResult: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 348.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 721.000000000000000000
+        Viewport.Height = 344.000000000000000000
+      end
+      object lytGetAreaInformation: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object edtGetAreaInformation: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          Size.Width = 725.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Enter Area ID'
+          OnKeyUp = edtSearchAreasTextKeyUp
+          object btnGetAreaInformationSearch: TEditButton
+            CanFocus = False
+            Cursor = crArrow
+            Size.Width = 80.000000000000000000
+            Size.Height = 21.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'Search'
+          end
+        end
+      end
+    end
+  end
+  object tlbHeader: TToolBar
+    Padding.Left = 10.000000000000000000
+    Padding.Top = 8.000000000000000000
+    Padding.Right = 10.000000000000000000
+    Padding.Bottom = 8.000000000000000000
+    Size.Width = 735.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lblTokenHeader: TLabel
+      Align = Left
+      AutoSize = True
+      StyledSettings = [Family, Size, FontColor]
+      Position.X = 10.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 35.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.WordWrap = False
+      Text = 'Token:'
+      TabOrder = 0
+    end
+    object edtToken: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Left
+      TabOrder = 1
+      Position.X = 50.000000000000000000
+      Position.Y = 8.000000000000000000
+      Margins.Left = 5.000000000000000000
+      Size.Width = 500.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
+      TextPrompt = 'API Token'
+    end
+  end
+end
