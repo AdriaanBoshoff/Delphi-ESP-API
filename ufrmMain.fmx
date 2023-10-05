@@ -13,10 +13,12 @@ object frmMain: TfrmMain
     Size.Width = 735.000000000000000000
     Size.Height = 414.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 0
     TabPosition = PlatformDefault
     Sizes = (
+      735s
+      388s
       735s
       388s
       735s
@@ -31,7 +33,7 @@ object frmMain: TfrmMain
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 110.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -280,7 +282,7 @@ object frmMain: TfrmMain
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 132.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -335,6 +337,106 @@ object frmMain: TfrmMain
             OnClick = btnGetAreaInformationSearchClick
           end
         end
+      end
+    end
+    object tbtmGetNearbyTopics: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 117.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Get Nearby Topics'
+      object lytGetNearbyTopics: TLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object lblTopicLatHeader: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Size.Width = 48.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'Latitude:'
+          TabOrder = 1
+        end
+        object edtTopicLatValue: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 3
+          Text = '-26.0269658'
+          Position.X = 53.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Latitude'
+        end
+        object lblTopicLongHeader: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = [Family, Size, FontColor]
+          Margins.Left = 20.000000000000000000
+          Position.X = 173.000000000000000000
+          Size.Width = 59.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.WordWrap = False
+          Text = 'Longitude:'
+          TabOrder = 0
+        end
+        object edtTopicLongValue: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Left
+          TabOrder = 2
+          Text = '28.0137339'
+          Position.X = 237.000000000000000000
+          Margins.Left = 5.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Longitude'
+        end
+        object btnGetNearbyTopics: TButton
+          Align = Left
+          Margins.Left = 50.000000000000000000
+          Position.X = 387.000000000000000000
+          Size.Width = 80.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Search'
+          OnClick = btnGetNearbyTopicsClick
+        end
+      end
+      object mmoNearbyTopics: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 725.000000000000000000
+        Size.Height = 348.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Viewport.Width = 721.000000000000000000
+        Viewport.Height = 344.000000000000000000
       end
     end
   end

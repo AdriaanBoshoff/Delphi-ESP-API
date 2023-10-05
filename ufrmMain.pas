@@ -39,9 +39,18 @@ type
     lytGetAreaInformation: TLayout;
     edtGetAreaInformation: TEdit;
     btnGetAreaInformationSearch: TEditButton;
+    tbtmGetNearbyTopics: TTabItem;
+    lytGetNearbyTopics: TLayout;
+    lblTopicLatHeader: TLabel;
+    edtTopicLatValue: TEdit;
+    lblTopicLongHeader: TLabel;
+    edtTopicLongValue: TEdit;
+    btnGetNearbyTopics: TButton;
+    mmoNearbyTopics: TMemo;
     procedure btnGetStatusClick(Sender: TObject);
     procedure btnCheckAllowanceClick(Sender: TObject);
     procedure btnGetAreaInformationSearchClick(Sender: TObject);
+    procedure btnGetNearbyTopicsClick(Sender: TObject);
     procedure btnSearchAreasGPSClick(Sender: TObject);
     procedure btnSearchAreasTextClick(Sender: TObject);
     procedure edtSearchAreasTextKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
@@ -204,6 +213,45 @@ begin
       end;
     finally
       mmoGetAreaInformationResult.EndUpdate;
+    end;
+  finally
+    esp.Free;
+  end;
+end;
+
+procedure TfrmMain.btnGetNearbyTopicsClick(Sender: TObject);
+begin
+  var esp := TESP.Create;
+  try
+    esp.Token := edtToken.Text;
+
+    var nearbyTopics := esp.GetNearbyTopics(edtTopicLatValue.Text, edtTopicLongValue.Text);
+
+    mmoNearbyTopics.BeginUpdate;
+    try
+      mmoNearbyTopics.ClearContent;
+
+      if nearbyTopics.ResponseCode = 200 then
+      begin
+        for var topic in nearbyTopics.Topics do
+        begin
+          mmoNearbyTopics.Lines.Add(Format('Active: %s', [DateTimeToStr(topic.Active)]));
+          mmoNearbyTopics.Lines.Add(Format('Body: %s', [topic.Body]));
+          mmoNearbyTopics.Lines.Add(Format('Category: %s', [topic.Category]));
+          mmoNearbyTopics.Lines.Add(Format('Distance: %n', [topic.Distance]));
+          mmoNearbyTopics.Lines.Add(Format('Followers: %d', [topic.Followers]));
+          mmoNearbyTopics.Lines.Add(Format('Timestamp: %s', [DateTimeToStr(topic.Timestamp)]));
+
+          mmoNearbyTopics.Lines.Add('');
+        end;
+      end
+      else
+      begin
+        mmoNearbyTopics.Lines.Add('Response Code: ' + nearbyTopics.ResponseCode.ToString);
+        mmoNearbyTopics.Lines.Add('Code Meaning: https://documenter.getpostman.com/view/1296288/UzQuNk3E#responses');
+      end;
+    finally
+      mmoNearbyTopics.EndUpdate;
     end;
   finally
     esp.Free;

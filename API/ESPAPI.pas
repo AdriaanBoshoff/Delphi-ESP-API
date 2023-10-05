@@ -16,6 +16,7 @@ type
       APIPath_AREASEARCH_Text = '/areas_search';
       APIPath_AREASEARCH_GPS = '/areas_nearby';
       APIPath_AREAINFO = '/area';
+      APIPath_NEARBYTOPICS = '/topics_nearby';
   private
   { Private Methods }
     function SetupRest(const APIPath: string = ''): TRESTRequest;
@@ -31,6 +32,7 @@ type
     function GetAreaSearchText(const Text: string): TESP_AreaResponse;
     function GetAreaSearchGPS(const Lat, Long: string): TESP_AreaResponse;
     function GetAreaInformation(const AreaID: string): TESP_AreaInfoResponse;
+    function GetNearbyTopics(const Lat, Long: string): TESP_NearbyTopicResponse;
   end;
 
 implementation
@@ -178,6 +180,38 @@ begin
         Result.Areas[index].Region := area.GetValue<string>('region');
 
         Inc(index);
+      end;
+    end;
+  finally
+    rest.Free;
+  end;
+end;
+
+function TESP.GetNearbyTopics(const Lat, Long: string): TESP_NearbyTopicResponse;
+begin
+  var rest := Self.SetupRest(APIPath_NEARBYTOPICS);
+  try
+    rest.AddParameter('lat', Lat);
+    rest.AddParameter('lon', Lat);
+
+    rest.Execute;
+
+    Result.ResponseCode := rest.Response.StatusCode;
+
+    if Result.ResponseCode = 200 then
+    begin
+      SetLength(Result.Topics, (rest.Response.JSONValue.FindValue('topics') as TJSONArray).Count);
+      var topicIndex := 0;
+      for var aTopic in rest.Response.JSONValue.FindValue('topics') as TJSONArray do
+      begin
+        Result.Topics[topicIndex].Active := ISO8601ToDate(aTopic.GetValue<string>('active'), False);
+        Result.Topics[topicIndex].Body := aTopic.GetValue<string>('body');
+        Result.Topics[topicIndex].Category := aTopic.GetValue<string>('category');
+        Result.Topics[topicIndex].Distance := aTopic.GetValue<Double>('distance');
+        Result.Topics[topicIndex].Followers := aTopic.GetValue<Integer>('followers');
+        Result.Topics[topicIndex].Timestamp := ISO8601ToDate(aTopic.GetValue<string>('timestamp'), False);
+
+        Inc(topicIndex);
       end;
     end;
   finally

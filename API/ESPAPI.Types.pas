@@ -86,6 +86,24 @@ type
     ResponseCode: Integer;
   end;
 
+  { /topics_nearby }
+
+type
+  TESP_NearbyTopic = record
+    Active: TDateTime;
+    Body: string;
+    Category: string;
+    Distance: Double;
+    Followers: Integer;
+    Timestamp: TDateTime;
+  end;
+
+type
+  TESP_NearbyTopicResponse = record
+    Topics: TArray<TESP_NearbyTopic>;
+    ResponseCode: Integer;
+  end;
+
 implementation
 
 end.
