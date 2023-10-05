@@ -22,16 +22,22 @@ type
     function SetupRest(const APIPath: string = ''): TRESTRequest;
   public
   { Public Variables }
-    Token: string;
-    TestMode: Boolean;
+    Token: string; // API Key
+    TestMode: Boolean; // Use this for testing GetAreaInformation
   public
   { Public Methods }
     constructor Create;
+    // Check API Usage and remaining Usage
     function GetAllowance: TESP_Allowance;
+    // Get Stages information for Eskom and Capetown
     function GetStatus: TESP_Status;
+    // Search Areas Using text
     function GetAreaSearchText(const Text: string): TESP_AreaResponse;
+    // Search Areas using Lat and Long GPS
     function GetAreaSearchGPS(const Lat, Long: string): TESP_AreaResponse;
+    // Get Loadshedding information for areas
     function GetAreaInformation(const AreaID: string): TESP_AreaInfoResponse;
+    // Get Topics from GPS location
     function GetNearbyTopics(const Lat, Long: string): TESP_NearbyTopicResponse;
   end;
 
