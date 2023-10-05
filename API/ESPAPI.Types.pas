@@ -53,19 +53,37 @@ type
   { /area }
 
 type
-  TESP_AreaInfo_Events = record
+  TESP_AreaInfo_Event = record
+    EventEnd: TDateTime;
+    Note: string;
+    EventStart: TDateTime;
   end;
 
 type
   TESP_AreaInfo_Info = record
+    Name: string;
+    Region: string;
+  end;
+
+type
+  TESP_AreaInfo_ScheduleDay = record
+    Date: string;
+    Name: string;
+    Stages: TArray<TArray<string>>;
   end;
 
 type
   TESP_AreaInfo_Schedule = record
+    Days: TArray<TESP_AreaInfo_ScheduleDay>;
+    Source: string;
   end;
 
 type
   TESP_AreaInfoResponse = record
+    Events: TArray<TESP_AreaInfo_Event>;
+    Info: TESP_AreaInfo_Info;
+    Schedule: TESP_AreaInfo_Schedule;
+    ResponseCode: Integer;
   end;
 
 implementation

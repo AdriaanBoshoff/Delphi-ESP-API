@@ -38,6 +38,8 @@ object frmMain: TfrmMain
       StyleLookup = ''
       TabOrder = 0
       Text = 'Check Allowance'
+      ExplicitSize.cx = 110.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
       object mmoAllowanceResult: TMemo
         Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
         DataDetectorTypes = []
@@ -79,6 +81,8 @@ object frmMain: TfrmMain
       StyleLookup = ''
       TabOrder = 0
       Text = 'Status'
+      ExplicitSize.cx = 53.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
       object btnGetStatus: TButton
         Align = Top
         Margins.Left = 5.000000000000000000
@@ -120,6 +124,8 @@ object frmMain: TfrmMain
       StyleLookup = ''
       TabOrder = 0
       Text = 'Search Areas (Text)'
+      ExplicitSize.cx = 120.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
       object mmoSearchAreasText: TMemo
         Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
         DataDetectorTypes = []
@@ -326,6 +332,7 @@ object frmMain: TfrmMain
             Size.PlatformDefault = False
             TabOrder = 0
             Text = 'Search'
+            OnClick = btnGetAreaInformationSearchClick
           end
         end
       end

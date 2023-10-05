@@ -41,6 +41,7 @@ type
     btnGetAreaInformationSearch: TEditButton;
     procedure btnGetStatusClick(Sender: TObject);
     procedure btnCheckAllowanceClick(Sender: TObject);
+    procedure btnGetAreaInformationSearchClick(Sender: TObject);
     procedure btnSearchAreasGPSClick(Sender: TObject);
     procedure btnSearchAreasTextClick(Sender: TObject);
     procedure edtSearchAreasTextKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
@@ -138,6 +139,71 @@ begin
       end;
     finally
       mmoAllowanceResult.EndUpdate;
+    end;
+  finally
+    esp.Free;
+  end;
+end;
+
+procedure TfrmMain.btnGetAreaInformationSearchClick(Sender: TObject);
+begin
+  var esp := TESP.Create;
+  try
+    esp.Token := edtToken.Text;
+
+    // Testing mode doesn't use allowance. So far only for this api call
+    esp.TestMode := True;
+
+    var areaInfo := esp.GetAreaInformation(edtGetAreaInformation.Text);
+
+    mmoGetAreaInformationResult.BeginUpdate;
+    try
+      mmoGetAreaInformationResult.ClearContent;
+
+      if areaInfo.ResponseCode = 200 then
+      begin
+        // Events
+        mmoGetAreaInformationResult.Lines.Add('Events:');
+        for var event in areaInfo.Events do
+        begin
+          mmoGetAreaInformationResult.Lines.Add('-');
+          mmoGetAreaInformationResult.Lines.Add(Format('  Start: %s', [DateTimeToStr(event.EventEnd)]));
+          mmoGetAreaInformationResult.Lines.Add(Format('  Note: %s', [event.Note]));
+          mmoGetAreaInformationResult.Lines.Add(Format('  End: %s', [DateTimeToStr(event.EventStart)]));
+        end;
+
+        // Info
+        mmoGetAreaInformationResult.Lines.Add('');
+        mmoGetAreaInformationResult.Lines.Add('Info:');
+        mmoGetAreaInformationResult.Lines.Add(' Name: ' + areaInfo.Info.Name);
+        mmoGetAreaInformationResult.Lines.Add(' Region: ' + areaInfo.Info.Region);
+
+        // Schedule
+        mmoGetAreaInformationResult.Lines.Add('');
+        mmoGetAreaInformationResult.Lines.Add('Schedule:');
+        for var day in areaInfo.Schedule.Days do
+        begin
+          mmoGetAreaInformationResult.Lines.Add('-');
+          mmoGetAreaInformationResult.Lines.Add(Format('  Date: %s', [day.Date]));
+          mmoGetAreaInformationResult.Lines.Add(Format('  Name: %s', [day.Name]));
+          mmoGetAreaInformationResult.Lines.Add('    Stages:');
+          for var stage in day.Stages do
+          begin
+            mmoGetAreaInformationResult.Lines.Add('');
+            for var stageValue in stage do
+            begin
+              mmoGetAreaInformationResult.Lines.Add('      ' + stageValue);
+            end;
+          end;
+        end;
+      end
+      else
+      begin
+        mmoGetAreaInformationResult.Lines.Add('Response Code: ' + areaInfo.ResponseCode.ToString);
+        mmoGetAreaInformationResult.Lines.Add('Code Meaning: https://documenter.getpostman.com/view/1296288/UzQuNk3E#responses');
+      end;
+    finally
+      mmoGetAreaInformationResult.EndUpdate;
     end;
   finally
     esp.Free;

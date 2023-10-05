@@ -15,23 +15,35 @@ type
       APIPath_STATUS = '/status';
       APIPath_AREASEARCH_Text = '/areas_search';
       APIPath_AREASEARCH_GPS = '/areas_nearby';
+      APIPath_AREAINFO = '/area';
   private
   { Private Methods }
     function SetupRest(const APIPath: string = ''): TRESTRequest;
   public
   { Public Variables }
     Token: string;
+    TestMode: Boolean;
   public
   { Public Methods }
+    constructor Create;
     function GetAllowance: TESP_Allowance;
     function GetStatus: TESP_Status;
     function GetAreaSearchText(const Text: string): TESP_AreaResponse;
     function GetAreaSearchGPS(const Lat, Long: string): TESP_AreaResponse;
+    function GetAreaInformation(const AreaID: string): TESP_AreaInfoResponse;
   end;
 
 implementation
 
 { TESP }
+
+constructor TESP.Create;
+begin
+  inherited;
+
+  Self.TestMode := False;
+  Self.Token := '';
+end;
 
 function TESP.GetAllowance: TESP_Allowance;
 begin
@@ -46,6 +58,70 @@ begin
       Result.Count := rest.Response.JSONValue.GetValue<Integer>('allowance.count');
       Result.Limit := rest.Response.JSONValue.GetValue<Integer>('allowance.limit');
       Result.AllowanceType := rest.Response.JSONValue.GetValue<string>('allowance.type');
+    end;
+  finally
+    rest.Free;
+  end;
+end;
+
+function TESP.GetAreaInformation(const AreaID: string): TESP_AreaInfoResponse;
+begin
+  var rest := Self.SetupRest(APIPath_AREAINFO);
+  try
+    rest.AddParameter('id', AreaID);
+
+    if Self.TestMode then
+      rest.AddParameter('test', 'current');
+
+    rest.Execute;
+
+    Result.ResponseCode := rest.Response.StatusCode;
+
+    if Result.ResponseCode = 200 then
+    begin
+      // Events
+      SetLength(Result.Events, (rest.Response.JSONValue.FindValue('events') as TJSONArray).Count);
+      var eventIndex := 0;
+      for var jEvent in rest.Response.JSONValue.FindValue('events') as TJSONArray do
+      begin
+        Result.Events[eventIndex].EventEnd := ISO8601ToDate(jEvent.GetValue<string>('end'), False);
+        Result.Events[eventIndex].Note := jEvent.GetValue<string>('note');
+        Result.Events[eventIndex].EventStart := ISO8601ToDate(jEvent.GetValue<string>('start'), False);
+
+        Inc(eventIndex);
+      end;
+
+      // Info
+      Result.Info.Name := rest.Response.JSONValue.GetValue<string>('info.name');
+      Result.Info.Region := rest.Response.JSONValue.GetValue<string>('info.region');
+
+      // Schedule
+      Result.Schedule.Source := rest.Response.JSONValue.GetValue<string>('schedule.source');
+      SetLength(Result.Schedule.Days, (rest.Response.JSONValue.FindValue('schedule.days') as TJSONArray).Count);
+      var scheduleDayIndex := 0;
+      for var jDay in rest.Response.JSONValue.FindValue('schedule.days') as TJSONArray do
+      begin
+        Result.Schedule.Days[scheduleDayIndex].Date := jDay.GetValue<string>('date');
+        Result.Schedule.Days[scheduleDayIndex].Date := jDay.GetValue<string>('name');
+
+        // Day Stages
+        SetLength(Result.Schedule.Days[scheduleDayIndex].Stages, (jDay.FindValue('stages') as TJSONArray).Count);
+        var stageIndex := 0;
+        for var jStage in (jDay.FindValue('stages') as TJSONArray) do
+        begin
+          SetLength(Result.Schedule.Days[scheduleDayIndex].Stages[stageIndex], (jStage as TJSONArray).Count);
+          var stageValueIndex := 0;
+          for var jStageValue in (jStage as TJSONArray) do
+          begin
+            Result.Schedule.Days[scheduleDayIndex].Stages[stageIndex][stageValueIndex] := jStageValue.GetValue<string>;
+
+            Inc(stageValueIndex);
+          end;
+
+          Inc(stageIndex);
+        end;
+        Inc(scheduleDayIndex);
+      end;
     end;
   finally
     rest.Free;
