@@ -1,5 +1,5 @@
 # Delphi-ESP-API
- Delphi API to interface with ESP API
+ Delphi API to interface with the EksomSePush API
 
 ## ESP API Key and Documentation
 * You can get your API key from here: https://eskomsepush.gumroad.com/l/api
